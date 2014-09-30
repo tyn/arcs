@@ -1,0 +1,8 @@
+.sng
+/work/
+/var/
+/attic/
+/node_modules/
+*.cmi
+*.cmx
+*.cmo

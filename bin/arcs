@@ -1,0 +1,37 @@
+#!/bin/sh
+
+SNG_SELF="$0"
+sng_symlinks=255
+while [ $sng_symlinks -ge 0 ] ; do
+  IFS='|' read -r sng_head sng_tail sng_path<<EOS
+` ls -dl "$SNG_SELF" \
+| sed -n 's:.*'"$SNG_SELF"' -> \(\(.\)\(.*\)\):\2|\3|\1:p' \
+`
+EOS
+  [ -z $sng_head ] && break
+  if [ "x$sng_head" = "x/" ] ; then
+    SNG_SELF="$sng_path"
+  else
+    SNG_SELF=`dirname "$SNG_SELF"`/"$sng_head$sng_tail"
+  fi
+  sng_symlinks=`expr $sng_symlinks - 1`
+  if [ $? -eq 1 ] ; then
+    echo "error: Too many levels of symbolic links." >&2
+    exit 1
+  fi
+done
+
+SNG_SUBCMD="${1:-usage}"
+[ $# -gt 0 ] && shift
+
+SNG_BASEDIR="${SNG_SELF%/*}/../"
+. "$SNG_BASEDIR/lib/sng/builtins.sh"
+sng_define_vars
+
+
+# FIXME: -nt is not defined in POSIX.
+[ ! -x "$SNG_APPDIR/exec.sh" \
+-o "$SNG_BASEDIR/.sng/timestamp" -nt "$SNG_APPDIR/exec.sh" \
+] && sng_init_launcher
+
+. "$SNG_APPDIR/exec.sh"

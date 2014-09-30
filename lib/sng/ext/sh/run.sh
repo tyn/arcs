@@ -1,0 +1,1 @@
+. "$SNG_SUBCMD_IMPL"
