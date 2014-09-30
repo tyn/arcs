@@ -1,5 +1,5 @@
 
-Arcs - the retrieval tool for preprints
+Arcs - the downloader of preprints
 
 ====
 Arcs is a downloader of preprints that facilitates researchers
