@@ -20,7 +20,7 @@ To install and setup arcs:
 ```
 
 Follow the displayed instruction to setup
-(s3cmd)[http://s3tools.org/s3cmd] (on which arcs depends).
+[s3cmd](http://s3tools.org/s3cmd) (on which arcs depends).
 
 #### Downloading example
 To download the preprints of the year 2014
