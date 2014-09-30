@@ -337,13 +337,13 @@ EOS
 
 # TODO: support multiple files
 sng_using_tmp() {
-  tmp=`sng_mkstemp` || sng_die "Failed to create tmpdir."
+  _sng_tmp=`sng_mkstemp` || sng_die "Failed to create tmpdir."
 
-  for arg; do
-    case "$arg" in
+  for _sng_arg; do
+    case "$_sng_arg" in
     '--delete')
       shift
-      sng_rmlater "$tmp"
+      sng_rmlater "$_sng_tmp"
       sng_settrap
       ;;
     *)
@@ -352,12 +352,12 @@ sng_using_tmp() {
     esac
   done
 
-  var="$1"
-  if [ -z "$var" ] ; then
-    echo "$tmpdir"
+  _sng_var="$1"
+  if [ -z "$_sng_var" ] ; then
+    echo "$_sng_tmp"
   else 
-    read -r "$var" <<EOS
-$tmp
+    read -r "$_sng_var" <<EOS
+$_sng_tmp
 EOS
   fi
 }
@@ -385,7 +385,7 @@ sng_require() {
 }
 
 sng_forread() {
-    sed -n -e 's/^\([-A-Za-z0-9]*\):[ ]*\(.*\)[ ]*$/\1|\2/p' "$@" \
+    sed -n 's/^\([-A-Za-z0-9]*\):[ ]*\(.*\)$/\1|\2/p' "$@" \
   | awk -F"|" 'BEGIN{IFS="|";OFS="|"}{$1=toupper($1);gsub("-","_",$1);print}' \
   | tr -d '\r'
 }
