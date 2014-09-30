@@ -15,6 +15,9 @@ touch "$SNG_BASEDIR"/.sng/timestamp
 if [ ! -f "$HOME"/.s3cfg ] ; then
   cat <<EOS
 --------------------------------------------------------------------------
+Add the following path to your PATH environment variable.
+  $SNG_BASEDIR/bin
+
 Configure s3cmd before running arcs.  See
   https://github.com/s3tools/s3cmd
 Note: s3cmd should be wrapped arcs as follows.
