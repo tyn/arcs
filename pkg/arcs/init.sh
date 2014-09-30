@@ -2,7 +2,7 @@ if [ -d "$SNG_BASEDIR"/.sng/apps ] ; then
   rm -rf "$SNG_BASEDIR"/.sng/apps
 fi
 
-_ npm install
+_ npm install || sng_die "Failed to install Node.js modules."
 
 if [ ! -x "$ARCS_VAR_DIR"/bin/s3cmd ] ; then
   sng_msg "Preparing s3cmd ..."
