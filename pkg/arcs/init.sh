@@ -17,7 +17,7 @@ if [ ! -f "$HOME"/.s3cfg ] ; then
 --------------------------------------------------------------------------
 Configure s3cmd before running arcs.  See
   https://github.com/s3tools/s3cmd
-When configuring s3cmd, run s3cmd under arcs:
+Note: s3cmd should be wrapped arcs as follows.
   bin/arcs s3cmd --configure
 
 IMPORTANT:
