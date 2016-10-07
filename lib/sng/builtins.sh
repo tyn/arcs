@@ -108,14 +108,14 @@ sng_exec_or_install()
 }
 
 sng_die_with_retcode() {
-  sng_retcode=${1:-1}
+  sng_retcode=${1:1}
   [ $# -ne 0 ] && shift
   sng_err "$*"
   exit "$sng_retcode"
 }
 
 sng_die() {
-  sng_die_with_retcode -1 "$*"
+  sng_die_with_retcode 1 "$*"
 }
 
 sng_normalize_basedir() {
